@@ -7,16 +7,19 @@ interface Props {
 }
 export const SearchResult = (props: Props) => {
   const [items, setItems] = useState<Film[]>([])
+
+  const [totalItem, setTotalItem] = useState(6)
+
   const fetch = () => {
     const arrs: Film[] = []
 
     for (let i = 0; i < 5; i++) {
       arrs.push({
         id: i,
-        title: 'lorem',
+        title: 'lorem dasddaw w dawdwwdwadwdwd waf wwwwwwwwwwwwwwwwwww ',
         description: '',
         coverPath: '',
-        genreIds: [],
+        genreIds: [1, 2, 3, 4, 5, 6],
         posterPath: '',
         seasons: [],
       })
@@ -29,7 +32,7 @@ export const SearchResult = (props: Props) => {
   }, [props.keyword])
 
   return (
-    <div className="absolute top[48px] left-0 right-0 rounded-md overflow-hidden bg-header">
+    <div className="absolute top-[48px] left-0 right-0 rounded-md overflow-hidden bg-header">
       {items.map((film, i) => (
         <div
           key={i}
@@ -40,7 +43,7 @@ export const SearchResult = (props: Props) => {
           {/* title and genres */}
           <div className="px-3">
             <p className="text-base">{film.title}</p>
-            <ul className="flex flex-wrap gap-x-1.5 text-sm">
+            <ul className="flex flex-wrap gap-x-1.5 text-sm opacity-[0.7]">
               {film.genreIds.map((id, i) => (
                 <li key={i}>item{i}</li>
               ))}
@@ -48,6 +51,11 @@ export const SearchResult = (props: Props) => {
           </div>
         </div>
       ))}
+      {
+        totalItem > 5 ? (
+          <button onClick={() => props.goToSearchPage()} className='px-3 py-1.5 bg-primary w-full hover:text-body'>More results</button>
+        ) : ('')
+      }
     </div>
   )
 }

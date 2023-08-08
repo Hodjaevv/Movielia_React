@@ -10,11 +10,14 @@ import Container from '../components/container'
 import { mergeClassName } from '../../utils'
 import { IoIosSearch } from 'react-icons/io'
 import { SearchResult } from '../components/search-result'
+// import default from './../../postcss.config';
 
 const MENU_CLASS = `
-    p-1.5
+    px-1.5
+    py-1
     rounded-md
     hover:bg-primary
+    mobile:px-6
 `
 const MENU_CLASS_ACTIVE = `
     bg-primary
@@ -27,6 +30,7 @@ const Header = () => {
 
   const [pathname, setPathname] = useState('')
   const pathnameRef = useRef('')
+  const defaultKeyword = useRef('')
 
   const [keyword, setKeyword] = useState('')
   const [isSearchFocus, setSearchFocus] = useState(false)
@@ -34,6 +38,7 @@ const Header = () => {
 
   const goToSearchPage = () => {
     if (keyword) {
+      defaultKeyword.current = keyword
       navigate(`/search?q=${keyword}`)
       setSearchFocus(false)
       searchRef.current?.blur()
@@ -42,14 +47,14 @@ const Header = () => {
 
   const initKeyword = () => {
     if (pathnameRef.current === '/search') {
-      setKeyword(params.get('q') || '')
+      setKeyword(defaultKeyword.current)
     } else {
       setKeyword('')
     }
   }
 
   const onWindowClick = () => {
-    setisSearchFocus(false)
+    setSearchFocus(false)
     initKeyword()
   }
 
@@ -63,11 +68,15 @@ const Header = () => {
   useEffect(() => {
     setPathname(location.pathname)
     pathnameRef.current = location.pathname
+    defaultKeyword.current = params.get('q') || ""
     initKeyword()
   }, [location.pathname])
 
   useEffect(() => {
     window.addEventListener('click', () => onWindowClick())
+    return () => {
+      window.removeEventListener('click', onWindowClick)
+    }
   }, [])
 
   return (
@@ -79,7 +88,20 @@ const Header = () => {
             <Link to={'/'}>Movielia</Link>
           </h1>
           {/* menu */}
-          <div className="pt-1 flex items-center gap-1.5">
+          <div className="
+            pt-1
+            flex
+            items-center
+            gap-1.5
+            mobile:fixed
+            mobile:bottom-0
+            mobile:left-0
+            mobile:right-0
+            mobile:justify-center
+            mobile:py-3
+          mobile:bg-header
+            mobile:gap-6
+                     ">
             <Link className={getMenuClass('/movie')} to={'/movies'}>
               Movies
             </Link>
