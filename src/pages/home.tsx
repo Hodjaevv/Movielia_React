@@ -48,7 +48,7 @@ export const Home = () => {
             </Section>
             {/* in theaters */}
             <Section title='In Theaters'>
-                <Slider className='slick-hero px-6' autoplay={true} slidesToShow={5} slidesToScroll={5}>
+                <Slider isMovieCard={true} autoplay={true} slidesToShow={4} slidesToScroll={4}>
                     {
                     inTheaters.map((film, i) => (
                     <Card film={film} key={i}></Card>
