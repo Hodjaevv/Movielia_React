@@ -80,8 +80,8 @@ const Header = () => {
   }, [])
 
   return (
-    <div className="bg-header">
-      <Container className="flex items-center justify-between">
+    <div className="bg-header sticky top-0 z-[99]">
+      <Container className="flex items-center justify-between gap-3">
         {/* brand menu */}
         <div className="flex items-center gap-6">
           <h1 className="text-2xl font-semibold">
@@ -111,7 +111,15 @@ const Header = () => {
           </div>
         </div>
         {/* search */}
-        <div className="relative border-b-[1.5px] border-white flex items-center p-1 flex-[0.5] focus-within:border-primary">
+        <div className="
+        relative
+         border-b-[1.5px]
+          border-white
+           flex
+            items-center
+             p-1
+              flex-[0.5]
+               focus-within:border-primary">
           <input
             onClick={(e) => {
               e.stopPropagation()

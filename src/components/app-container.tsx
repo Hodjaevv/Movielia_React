@@ -6,6 +6,7 @@ import Header from "../layouts/header"
 
 const AppContainer = () => {
   return (
+    <div className='pb-[64px]'>
     <BrowserRouter>
         {/* header */}
         <Header/>
@@ -14,6 +15,7 @@ const AppContainer = () => {
         {/* footer */}
         <Footer/>
     </BrowserRouter>
+    </div>
   )
 }
 

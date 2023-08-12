@@ -12,9 +12,10 @@ export const Slider = (props: Props) => {
     if (props.isMovieCard) {
         settings = {
             ...settings,
+            infinite: true, 
             slidesToShow: 4,
-            slidesToScroll: 4,
-            swipe: false,
+            slidesToScroll: 1,
+            swipe: true,
             responsive: [ 
                 {
                     breakpoint: 600,
